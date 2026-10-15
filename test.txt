@@ -1,0 +1,68 @@
+// This is a test file to check the parser's functionality.
+
+// Global variable declaration
+int global_var;
+
+// Class Declaration with fields (variables and methods)
+class MyClass {
+    int member_x;
+    double member_y;
+
+    void setX(int val) {
+        this.member_x = val;
+    }
+
+    int getX() {
+        return member_x;
+    }
+}
+
+// Function declaration
+int calculate(int a, int b) {
+    int result;
+    result = (a + b) * 2;
+    return result;
+}
+
+// The required main function, serving as the entry point
+void main() {
+    // Variable Declarations
+    int i;
+    int j;
+    bool condition;
+    string message;
+    
+    // Array Declaration
+    my_array = NewArray(10, int);
+
+    // Assignments and Expressions
+    i = 0;
+    condition = true;
+    message = "Starting loop...";
+    
+
+    // For loop statement
+    for (i = 0; i < 10; i = i + 1) {
+        my_array[i] = calculate(i, j);
+        if (i == 5) {
+            break; // Break statement
+        }
+    }
+
+    // While loop statement
+    while (condition == true && i > 0) {
+        i = i - 1;
+        if (i == 0) {
+            condition = false;
+        }
+    }
+    
+    // If-Else statement with complex expression
+    if ((j >= 100) || (i != 0)) {
+        int local_in_if;
+        local_in_if = 5;
+    } else {
+        string else_message;
+        else_message = "Condition was false.";
+    }
+}
