@@ -1,0 +1,8 @@
+void main() {
+    int[] arr = NewArray(3, int);
+    arr[0] = 1;
+    Print("before\n");
+    int i = -1;
+    Print(arr[i]);          // negative index caught by the unsigned compare
+    Print("after\n");
+}

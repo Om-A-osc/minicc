@@ -1,0 +1,143 @@
+Program
+  2:11 InterfaceDecl I
+    2:19 Prototype f : int(int a)
+    2:34 Prototype g : void()
+  3:7 ClassDecl A extends B implements I, J
+    4:9 VarDecl x : int
+    5:14 VarDecl ys : double[]
+    6:9 FuncDecl f : int(int a)
+      6:18 Block
+        6:20 Return
+          6:29 Binary +
+            6:27 Ident a
+            6:35 Field .x
+              6:31 This
+    7:10 FuncDecl g : void()
+      7:14 Block
+  9:5 VarDecl glob : int
+    9:12 IntLit 31
+  10:8 VarDecl d : double
+    10:12 DoubleLit 2500
+  11:6 FuncDecl main : void()
+    11:13 Block
+      12:11 VarDecl arr : int[]
+        12:17 NewArray int
+          12:26 IntLit 5
+      13:5 For
+        Init
+          13:14 VarDecl i : int
+            13:18 IntLit 0
+        Cond
+          13:23 Binary <
+            13:21 Ident i
+            13:25 IntLit 5
+        Step
+          13:29 PostIncrement
+            13:28 Ident i
+        Body
+          13:33 ExprStmt
+            13:40 Assign
+              13:36 Index
+                13:33 Ident arr
+                13:37 Ident i
+              13:44 Binary *
+                13:42 Ident i
+                13:46 IntLit 2
+      14:5 For
+        Init
+        Cond
+        Step
+        Body
+          14:14 Break
+      15:7 VarDecl obj : A
+        15:13 New A
+      16:5 ExprStmt
+        16:11 Assign +=
+          16:8 Field .x
+            16:5 Ident obj
+          16:14 IntLit 3
+      17:5 ExprStmt
+        17:11 Assign *=
+          17:8 Field .x
+            17:5 Ident obj
+          17:14 IntLit 2
+      17:17 ExprStmt
+        17:23 Assign -=
+          17:20 Field .x
+            17:17 Ident obj
+          17:26 IntLit 1
+      17:29 ExprStmt
+        17:35 Assign /=
+          17:32 Field .x
+            17:29 Ident obj
+          17:38 IntLit 2
+      17:41 ExprStmt
+        17:47 Assign %=
+          17:44 Field .x
+            17:41 Ident obj
+          17:50 IntLit 3
+      18:5 Print
+        18:14 MethodCall .f
+          18:11 Ident obj
+          18:17 IntLit 1
+        18:21 StringLit "a\tb\n"
+        18:34 MethodCall .length
+          18:31 Ident arr
+      19:5 If
+        19:24 Binary ||
+          19:9 Unary !
+            19:18 Binary ==
+              19:14 Index
+                19:11 Ident arr
+                19:15 IntLit 0
+              19:21 IntLit 0
+          19:39 Binary &&
+            19:34 Binary >=
+              19:30 Index
+                19:27 Ident arr
+                19:31 IntLit 1
+              19:37 IntLit 2
+            19:49 Binary !=
+              19:45 Index
+                19:42 Ident arr
+                19:46 IntLit 2
+              19:52 IntLit 4
+        Then
+          19:55 ExprStmt
+            19:55 PreDecrement
+              19:60 Field .x
+                19:57 Ident obj
+        Else
+          19:69 ExprStmt
+            19:74 PostDecrement
+              19:72 Field .x
+                19:69 Ident obj
+      20:5 While
+        20:12 BoolLit true
+        20:18 Block
+          20:20 If
+            20:38 Binary >
+              20:24 ReadInteger
+              20:40 IntLit 0
+            Then
+              20:43 Continue
+            Else
+              20:58 Break
+      21:12 VarDecl s : string
+        21:16 ReadLine
+      22:10 VarDecl b : bool
+        22:19 Binary ==
+          22:14 NullLit
+          22:22 Ident obj
+      23:5 Block
+      24:5 Block
+        24:11 VarDecl nested : int
+          24:20 Unary -
+            24:24 Index
+              24:21 Ident arr
+              24:25 IntLit 1
+        24:29 ExprStmt
+          24:35 PostIncrement
+            24:29 Ident nested
+      25:5 Return
+exit: 0

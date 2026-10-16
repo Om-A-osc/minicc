@@ -1,0 +1,35 @@
+// Small program exercising expressions, loops and mixed int/double math.
+
+int fib(int n) {
+    if (n < 2) return n;
+    return fib(n - 1) + fib(n - 2);
+}
+
+double average(int[] xs) {
+    double total = 0;
+    for (int i = 0; i < xs.length(); i++) total += xs[i];
+    return total / xs.length();
+}
+
+void main() {
+    int x = 2 + 3 * 4;          // 14, folded at -O
+    int y = x * x - (x + x);    // 168
+    Print("x=", x, " y=", y, "\n");
+
+    int[] xs = NewArray(4, int);
+    for (int i = 0; i < 4; i++) xs[i] = fib(i + 5);
+    Print("fib: ", xs[0], " ", xs[1], " ", xs[2], " ", xs[3], "\n");
+    Print("avg=", average(xs), "\n");
+
+    bool flag = x > 10 && y % 2 == 0;
+    Print(flag, " ", !flag, "\n");
+
+    int k = 0;
+    while (k < 100) {
+        k++;
+        if (k % 7 != 0) continue;
+        if (k > 30) break;
+        Print(k, " ");
+    }
+    Print("\n");
+}

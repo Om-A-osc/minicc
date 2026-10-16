@@ -1,0 +1,18 @@
+# build output
+build/
+*.o
+*.obj
+*.exe
+*.d
+
+# compiler output when experimenting in the tree
+*.s
+*.ll
+*.ptx
+*.minicc.s
+*.minicc.ll
+
+# editor / OS noise
+*.swp
+.DS_Store
+Thumbs.db

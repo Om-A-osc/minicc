@@ -1,4 +1,5 @@
-// This is a test file to check the parser's functionality.
+// The original course-assignment test program, now also type checked.
+// (It declares my_array, which the original version used without declaring.)
 
 // Global variable declaration
 int global_var;
@@ -33,7 +34,7 @@ void main() {
     string message;
     
     // Array Declaration
-    my_array = NewArray(10, int);
+    int[] my_array = NewArray(10, int);
 
     // Assignments and Expressions
     i = 0;

@@ -1,0 +1,26 @@
+// Every syntactic construct, dumped as an AST.
+interface I { int f(int a); void g(); }
+class A extends B implements I, J {
+    int x;
+    double[] ys;
+    int f(int a) { return a + this.x; }
+    void g() { }
+}
+int glob = 0x1F;
+double d = 2.5e3;
+void main() {
+    int[] arr = NewArray(5, int);
+    for (int i = 0; i < 5; i++) arr[i] = i * 2;
+    for (;;) break;
+    A obj = New(A);
+    obj.x += 3;
+    obj.x *= 2; obj.x -= 1; obj.x /= 2; obj.x %= 3;
+    Print(obj.f(1), "a\tb\n", arr.length());
+    if (!(arr[0] == 0) || arr[1] >= 2 && arr[2] != 4) --obj.x; else obj.x--;
+    while (true) { if (ReadInteger() > 0) continue; else break; }
+    string s = ReadLine();
+    bool b = null == obj;
+    ;
+    { int nested = -arr[1]; nested++; }
+    return;
+}

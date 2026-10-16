@@ -1,0 +1,10 @@
+tests/parse/syntax_errors.dcf:3:13: error: syntax error, unexpected ';'
+tests/parse/syntax_errors.dcf:4:12: error: syntax error, unexpected ';'
+tests/parse/syntax_errors.dcf:5:15: error: syntax error, unexpected '{'
+tests/parse/syntax_errors.dcf:6:7: error: syntax error, unexpected '=', expecting identifier or []
+tests/parse/syntax_errors.dcf:6:9: error: stray '@' in program
+tests/parse/syntax_errors.dcf:7:5: error: syntax error, unexpected Print
+tests/parse/syntax_errors.dcf:8:1: error: syntax error, unexpected '}'
+tests/parse/syntax_errors.dcf:9:5: error: syntax error, unexpected integer literal, expecting identifier or []
+8 errors generated.
+exit: 1

@@ -1,0 +1,80 @@
+// Inheritance chain, interface dispatch through the runtime lookup table,
+// implicit-this calls, upcasts, null comparisons and field access chains.
+
+interface Animal {
+    string sound();
+    int legs();
+}
+
+interface Named {
+    string name();
+}
+
+class Creature implements Named {
+    string label;
+    int age;
+
+    void setup(string l, int a) {
+        label = l;
+        age = a;
+    }
+
+    string name() { return label; }
+    string describe() { return name() + " (" + kind() + ")"; }   // implicit this calls, virtual
+    string kind() { return "creature"; }
+}
+
+class Dog extends Creature implements Animal {
+    Dog friend;
+
+    string sound() { return "woof"; }
+    int legs() { return 4; }
+    string kind() { return "dog"; }
+}
+
+class Puppy extends Dog {
+    string sound() { return "yip"; }
+    string kind() { return "puppy"; }
+}
+
+class Bird extends Creature implements Animal {
+    string sound() { return "tweet"; }
+    int legs() { return 2; }
+    string kind() { return "bird"; }
+}
+
+void chorus(Animal[] zoo) {
+    for (int i = 0; i < zoo.length(); i++) {
+        Print(zoo[i].sound(), "/", zoo[i].legs(), " ");
+    }
+    Print("\n");
+}
+
+void main() {
+    Dog rex = New(Dog);
+    rex.setup("Rex", 5);
+    Puppy bit = New(Puppy);
+    bit.setup("Bit", 1);
+    Bird tweety = New(Bird);
+    tweety.setup("Tweety", 2);
+    rex.friend = bit;
+
+    Animal[] zoo = NewArray(3, Animal);
+    zoo[0] = rex;
+    zoo[1] = bit;
+    zoo[2] = tweety;
+    chorus(zoo);
+
+    Creature c = bit;                       // upcast two levels
+    Print(c.describe(), "\n");              // dynamic dispatch picks Puppy.kind
+    Print(rex.describe(), "\n");
+    Print(tweety.describe(), "\n");
+
+    Named n = tweety;                        // interface view
+    Print(n.name(), " is ", tweety.age, "\n");
+
+    Print(rex.friend.name(), " is ", rex.friend.age, "\n");
+    Print(rex.friend.friend == null, " ", rex == rex, " ", c == bit, "\n");
+    Dog nobody = null;
+    if (nobody == null) Print("nobody home\n");
+}

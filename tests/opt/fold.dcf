@@ -1,0 +1,22 @@
+// Optimiser showcase: constant folding, propagation through temps,
+// constant branch elimination, local CSE of loads and arithmetic, dead
+// store elimination and block merging. Compare --dump-ir -O0 and -O.
+
+int g;
+
+int compute(int a, int b) {
+    int unused = a * 100;          // dead store: never loaded
+    int c = 2 + 3 * 4;             // folded to 14
+    int d = (a + b) * (a + b);     // a + b computed once
+    int e = (a + b) - c;           // reuses a + b and the constant
+    if (10 > 20) {                 // branch folded away
+        d = -1;
+    }
+    if (true) e = e + 1;           // condition folded, blocks merged
+    g = d + e;
+    return g;
+}
+
+void main() {
+    Print(compute(3, 4), "\n");
+}

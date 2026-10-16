@@ -1,0 +1,51 @@
+// Calling conventions: more arguments than fit in registers, mixed int and
+// double parameters, recursion, mutual recursion and globals.
+
+int counter = 0;
+double scale = 2.5;
+string banner;
+
+int many(int a, int b, int c, int d, int e, int f, int g, int h, double x, double y) {
+    counter++;
+    Print(a, b, c, d, e, f, g, h, " ", x, " ", y, "\n");
+    return a + b + c + d + e + f + g + h;
+}
+
+double mixed(double a, int b, double c, int d, double e, int f, double g, int h, double i, int j) {
+    return a + b + c + d + e + f + g + h + i + j;
+}
+
+bool isEven(int n) {
+    if (n == 0) return true;
+    return isOdd(n - 1);
+}
+
+bool isOdd(int n) {
+    if (n == 0) return false;
+    return isEven(n - 1);
+}
+
+int gcd(int a, int b) {
+    while (b != 0) {
+        int t = b;
+        b = a % b;
+        a = t;
+    }
+    return a;
+}
+
+void bump() { counter += 10; }
+
+void main() {
+    banner = "calls";
+    Print(banner, "\n");
+    Print(many(1, 2, 3, 4, 5, 6, 7, 8, 0.5, 1.25), "\n");
+    Print(mixed(1.5, 2, 3.5, 4, 5.5, 6, 7.5, 8, 9.5, 10), "\n");
+    Print(isEven(10), " ", isOdd(7), " ", isEven(3), "\n");
+    Print(gcd(84, 36), " ", gcd(17, 5), "\n");
+    bump();
+    Print(counter, " ", scale * counter, "\n");
+    int depth = 0;
+    for (int i = 0; i < 1000; i++) depth = depth + gcd(i, 6);
+    Print(depth, "\n");
+}

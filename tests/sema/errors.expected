@@ -1,0 +1,29 @@
+tests/sema/errors.dcf:5:5: error: redeclaration of variable 'g'
+tests/sema/errors.dcf:24:7: error: class 'Bad' extends unknown class 'Missing'
+tests/sema/errors.dcf:22:7: error: inheritance cycle involving class 'Loop'
+tests/sema/errors.dcf:17:9: error: field 'x' is already declared in a superclass of 'Derived'
+tests/sema/errors.dcf:18:12: error: method 'get' overrides 'Base.get' with a different signature
+tests/sema/errors.dcf:16:7: error: class 'Derived' does not implement method 'area' of interface 'Shape'
+tests/sema/errors.dcf:26:5: error: control reaches end of non-void function 'noReturn'
+tests/sema/errors.dcf:31:13: error: cannot initialize a variable of type int with a value of type string
+tests/sema/errors.dcf:32:16: error: cannot initialize a variable of type bool with a value of type int
+tests/sema/errors.dcf:33:5: error: use of undeclared identifier 'undeclared'
+tests/sema/errors.dcf:34:11: error: invalid operands to binary '+' (int and bool)
+tests/sema/errors.dcf:35:9: error: if condition has type int, expected bool
+tests/sema/errors.dcf:36:12: error: while condition has type int, expected bool
+tests/sema/errors.dcf:37:5: error: 'break' is not inside a loop
+tests/sema/errors.dcf:38:16: error: cannot initialize a variable of type string with a value of type null
+tests/sema/errors.dcf:39:16: error: New: unknown class 'Missing'
+tests/sema/errors.dcf:40:16: error: cannot instantiate interface 'Shape'
+tests/sema/errors.dcf:41:8: error: class 'Base' has no field named 'nothere'
+tests/sema/errors.dcf:42:8: error: method 'get' expects 0 arguments but 1 was given
+tests/sema/errors.dcf:43:12: error: class 'Base' has no field named 'get'
+tests/sema/errors.dcf:45:9: error: array index has type double, expected int
+tests/sema/errors.dcf:46:12: error: arrays have no method named 'size'
+tests/sema/errors.dcf:47:5: error: 'this' used outside of a class method
+tests/sema/errors.dcf:48:11: error: Print cannot print a value of type int[]
+tests/sema/errors.dcf:49:5: error: void function 'main' should not return a value
+tests/sema/errors.dcf:50:16: error: invalid operand to unary '-' (bool)
+tests/sema/errors.dcf:52:6: error: operand of '++' has type bool, expected int
+27 errors generated.
+exit: 1

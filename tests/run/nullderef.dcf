@@ -1,0 +1,11 @@
+class Box { int v; Box inner; }
+
+void main() {
+    Box b = New(Box);
+    b.v = 3;
+    Print(b.v, "\n");
+    Box[] boxes = NewArray(2, Box);
+    boxes[0] = b;
+    Print(boxes[0].v, "\n");
+    Print(boxes[1].v, "\n");    // boxes[1] is null
+}

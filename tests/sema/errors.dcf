@@ -1,0 +1,53 @@
+// Every statement below contains exactly one semantic error.
+// Expected diagnostics are listed in errors.expected.
+
+int g;
+int g;                          // redeclaration
+
+interface Shape {
+    double area();
+}
+
+class Base {
+    int x;
+    int get() { return x; }
+}
+
+class Derived extends Base implements Shape {
+    int x;                      // field already declared in superclass
+    double get() { return 1.0; }  // override with different signature
+    // missing area() from Shape
+}
+
+class Loop extends Loop { }     // inheritance cycle
+
+class Bad extends Missing { }   // unknown superclass
+
+int noReturn(int a) {
+    if (a > 0) return 1;        // control reaches end of non-void function
+}
+
+void main() {
+    int i = "hello";            // bad initializer
+    bool b = 1 + 2;             // bad initializer type
+    undeclared = 5;             // undeclared identifier
+    i = i + true;               // invalid operands
+    if (i) i = 0;               // non-bool condition
+    while (1) { }               // non-bool condition
+    break;                      // break outside loop
+    string s = null;            // null not assignable to string
+    Base obj = New(Missing);    // unknown class
+    Shape sh = New(Shape);      // cannot instantiate interface
+    obj.nothere = 1;            // no such field
+    obj.get(1);                 // wrong argument count
+    i = obj.get;                // field access on method name: no such field
+    int[] arr = NewArray(3, int);
+    arr[1.5] = 2;               // bad index type
+    i = arr.size();             // arrays only have length()
+    this.x = 1;                 // this outside a class
+    Print(arr);                 // cannot print array
+    return 3;                   // void function returning a value
+    double d = -b;              // bad unary operand
+    i++;
+    b++;                        // ++ on bool
+}

@@ -1,0 +1,10 @@
+reading 4 lines
+0: [first line] false
+1: [second] false
+2: [stop] true
+first line;second;
+ababab	<tab
+quote: "hi" backslash: \ done
+true false true
+total=35
+exit: 0

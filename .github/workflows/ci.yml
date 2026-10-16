@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  linux:
+    name: Linux (System V ABI, gcc + clang/llc + gdb)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y flex bison gcc clang llvm gdb
+
+      - name: Build
+        run: make
+
+      - name: Test suite (both backends, -O0 and -O)
+        run: make test
+
+      - name: PTX smoke test (LLVM IR -> NVPTX)
+        run: |
+          build/minicc --emit-llvm -O examples/shapes.dcf -o shapes.ll
+          llc -march=nvptx64 -mcpu=sm_50 shapes.ll -o shapes.ptx
+          grep -q '^.target sm_50' shapes.ptx
+          grep -q 'mcc_Square__name' shapes.ptx
+          head -40 shapes.ptx
+
+      - name: DWARF line table smoke test (gdb steps by MiniCC source line)
+        run: |
+          build/minicc -g examples/arith.dcf -o arith
+          gdb -q -batch -ex 'break mcc_fib' -ex run -ex 'info line' -ex bt arith | tee gdb.log
+          grep -q 'examples/arith.dcf:3' gdb.log
+          grep -q 'mcc_main () at examples/arith.dcf:20' gdb.log
+
+      - name: Object file / symbol inspection
+        run: |
+          build/minicc -S -g examples/shapes.dcf -o shapes.s
+          gcc -c shapes.s -o shapes.o
+          readelf -S shapes.o | grep -E 'debug_line|eh_frame'
+          nm shapes.o | grep -E ' T mcc_|mccvt_'
+
+  windows:
+    name: Windows (Microsoft x64 ABI, MSYS2 MinGW)
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            flex bison make diffutils
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-clang
+
+      - name: Build
+        run: make
+
+      - name: Test suite
+        run: make test

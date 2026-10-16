@@ -1,0 +1,74 @@
+// Classes, single inheritance, interfaces and dynamic dispatch.
+
+interface Shape {
+    double area();
+    string name();
+}
+
+class Point {
+    int x;
+    int y;
+
+    void init(int px, int py) {
+        x = px;
+        y = py;
+    }
+
+    int manhattan() { return x + y; }
+}
+
+class Rect implements Shape {
+    Point origin;
+    int w;
+    int h;
+
+    void init(int px, int py, int pw, int ph) {
+        origin = New(Point);
+        origin.init(px, py);
+        w = pw;
+        h = ph;
+    }
+
+    double area() { return 1.0 * w * h; }
+    string name() { return "rect"; }
+}
+
+class Square extends Rect {
+    void initSquare(int px, int py, int side) {
+        this.init(px, py, side, side);
+    }
+
+    string name() { return "square"; }   // overrides Rect.name
+}
+
+int sum(int[] values) {
+    int total = 0;
+    for (int i = 0; i < values.length(); i++) total += values[i];
+    return total;
+}
+
+void main() {
+    Shape[] shapes = NewArray(2, Shape);
+    Rect r = New(Rect);
+    r.init(0, 0, 3, 4);
+    Square s = New(Square);
+    s.initSquare(1, 1, 5);
+    shapes[0] = r;
+    shapes[1] = s;
+
+    for (int i = 0; i < shapes.length(); i++) {
+        Print(shapes[i].name(), " area=", shapes[i].area(), "\n");
+    }
+
+    Rect viaBase = s;                 // upcast
+    Print(viaBase.name(), "\n");      // dynamic dispatch: prints "square"
+    Print(s.origin.manhattan(), "\n");
+
+    int[] nums = NewArray(5, int);
+    for (int i = 0; i < 5; i++) nums[i] = (i + 1) * (i + 1);
+    Print("sum=", sum(nums), "\n");
+
+    string greeting = "hello";
+    greeting += ", world";
+    if (greeting == "hello, world" && !(r == null)) Print(greeting, "\n");
+}

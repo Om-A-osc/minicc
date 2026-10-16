@@ -1,0 +1,7 @@
+int f(int d) { return 100 % d; }
+
+void main() {
+    Print(f(7), "\n");
+    Print(f(0), "\n");
+    Print("not reached\n");
+}

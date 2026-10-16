@@ -1,0 +1,32 @@
+// Strings, console input and escapes.
+
+string repeat(string s, int n) {
+    string r = "";
+    for (int i = 0; i < n; i++) r += s;
+    return r;
+}
+
+void main() {
+    int count = ReadInteger();
+    Print("reading ", count, " lines\n");
+    string all = "";
+    for (int i = 0; i < count; i++) {
+        string line = ReadLine();
+        Print(i, ": [", line, "] ", line == "stop", "\n");
+        if (line == "stop") break;
+        all = all + line + ";";
+    }
+    Print(all, "\n");
+    Print(repeat("ab", 3), "\t<tab\n");
+    Print("quote: \"hi\" backslash: \\ done\n");
+    string a = "x";
+    string b = "x";
+    Print(a == b, " ", a != b, " ", "x" + "y" == "xy", "\n");
+    int total = 0;
+    while (true) {
+        int v = ReadInteger();
+        if (v < 0) break;
+        total += v;
+    }
+    Print("total=", total, "\n");
+}

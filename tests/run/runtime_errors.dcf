@@ -1,0 +1,27 @@
+// Each runtime check is exercised in turn; the program picks which one
+// via ReadInteger so a single source covers all three diagnostics.
+
+class Node {
+    int value;
+    Node next;
+}
+
+void main() {
+    int which = ReadInteger();
+    int[] arr = NewArray(3, int);
+    Node n = New(Node);
+    Print("start\n");
+    if (which == 1) {
+        int i = 5;
+        arr[i] = 1;                 // out of bounds
+    } else if (which == 2) {
+        Node m = n.next;            // null
+        Print(m.value);             // dereference
+    } else if (which == 3) {
+        int zero = which - 3;
+        Print(10 / zero);           // division by zero
+    } else {
+        Print("no error\n");
+    }
+    Print("unreachable\n");
+}
